@@ -99,6 +99,7 @@ def test_annotate_stamp_type():
 
 class StampTest(TestCase):
     def test_stamped_at(self):
+        raise AssertionError
         stamp = Stamp(stamped_at='2020/01/01 00:00:00', type=CLOCK_IN)
         self.assertEqual(stamp.stamped_at, datetime(2020, 1, 1))
 
