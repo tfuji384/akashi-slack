@@ -17,7 +17,6 @@ from app.settings import settings
 api = FastAPI(docs_url=None, redoc_url=None)
 logger = logging.getLogger(__name__)
 slack = WebClient(settings.SLACK_BOT_TOKEN)
-slack.chat_delete
 
 
 async def get_db():
