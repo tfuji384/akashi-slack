@@ -1,4 +1,4 @@
-akashi-slack
+ak4-slack
 ====
 
 ## TL;DR
@@ -16,6 +16,7 @@ akashi-slack
 - slash commandsの設定
   - slash commandを追加する
   ![slach command 1](statics/slash_commands_1.png)
+
   - request urlを設定する(パスは`/slash`)
   ![slash command 2](statics/slash_commands_2.png)
 
@@ -26,6 +27,14 @@ akashi-slack
 - permissionsを追加
   - `chat:write`, `channels:join`（打刻の通知先を設定しない場合は不要）を追加する
   ![bot user scopes](statics/bot_user_scopes.png)
+
+### Deploy to Heroku
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+- Heroku Schedulerに以下のjobを追加する
+  - `curl https://[your-app-name].herokuapp.com/`（Frequency: Every 10 minutes）
+  - `python refresh_user_tokens`（Frequency: Daily at 6:00 PM UTC）
 
 ## Environment Veriables
 
@@ -54,15 +63,6 @@ akashi-slack
   run isort
 - `pipenv run test-cov`
   run tests
-
-### Deploy to Heroku
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-- Heroku Schedulerに以下のjobを追加する
-  - `curl https://[your-app-name].herokuapp.com/`（Frequency: Every 10 minutes）
-  - `python refresh_user_tokens`（Frequency: Daily at 6:00 PM UTC）
-
 
 ## License
 
