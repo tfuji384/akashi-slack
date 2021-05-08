@@ -1,0 +1,25 @@
+{
+    "env": {
+        "AKASHI_COMPANY_ID": {
+            "description": "ログイン時に入力するAKASHIの企業ID"
+        },
+        "SLACK_BOT_TOKEN": {
+            "description": "SlackのBot User OAuth Token"
+        },
+        "SLACK_CHANNEL_ID": {
+            "description": "打刻の通知先（設定しない場合は通知されません）",
+            "required": false
+        },
+        "SLACK_SIGNING_SECRET": {
+            "description": "SlackAppのSigning Secret（リクエストの検証に利用します）"
+        },
+        "TZ": {
+            "description": "タイムゾーン",
+            "value": "Asia/Tokyo"
+        }
+    },
+    "addons": [
+        "heroku-postgresql:hobby-dev",
+        "scheduler:standard"
+    ]
+}
