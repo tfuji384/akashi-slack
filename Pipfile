@@ -13,9 +13,6 @@ uvicorn = "*"
 python-multipart = "*"
 python-dateutil = "*"
 psycopg2-binary = "*"
-uvloop = "*"
-httptools = "*"
-gunicorn = "*"
 
 [dev-packages]
 yapf = "*"
