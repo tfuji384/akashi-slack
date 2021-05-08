@@ -44,7 +44,7 @@ akashi-slack
 
 ### Installation
 
-- `pipenv install`
+- `pipenv install --dev`
 
 ### Pipenv scripts
 
