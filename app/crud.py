@@ -16,9 +16,7 @@ def fetch_all(db: Session) -> List[UserToken]:
 
 
 def fetch_by_expires_at(db: Session, expires_at_lt: datetime) -> List[UserToken]:
-    res = db.query(UserToken).filter(or_(UserToken.expires_at == None, UserToken.expires_at < expires_at_lt)).all()
-    db.commit()
-    return res
+    return db.query(UserToken).filter(or_(UserToken.expires_at == None, UserToken.expires_at < expires_at_lt)).all()
 
 
 def create(db: Session, user_id: str, token: str, expires_at: Optional[datetime] = None) -> UserToken:

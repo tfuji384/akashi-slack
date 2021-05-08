@@ -1,5 +1,6 @@
 ak4-slack
 ====
+[![test](https://github.com/tfuji384/akashi-slack/actions/workflows/python-app.yml/badge.svg)](https://github.com/tfuji384/akashi-slack/actions/workflows/python-app.yml)
 
 ## TL;DR
 
