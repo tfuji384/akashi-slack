@@ -100,7 +100,7 @@ async def actions(request: Request, db: Session = Depends(get_db)):
 
     if callback_id == 'api_token':
         try:
-            api_token = payload['submission']['api_token']
+            api_token = payload['submission']['api_token'].strip()
             UUID(api_token)
             update_or_create(db=db, user_id=user_id, token=api_token)
             slack.chat_postMessage(channel=user_id, text='APIトークンを登録しました')
