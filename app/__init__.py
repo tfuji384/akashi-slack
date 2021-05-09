@@ -52,7 +52,7 @@ async def slash(request: Request, db: Session = Depends(get_db)):
         message = ':warning:エラーが発生しました\n'\
             f'- 環境変数の`SLACK_CHANNEL_ID`を確認してください（現在の値：{settings.SLACK_CHANNEL_ID}）\n'\
             '- private-channelには通知できません\n'\
-            '- 打刻の通知が不要な場合は環境変数の`SLACK_CHANNEL_ID`を削除してください)'\
+            '- 打刻の通知が不要な場合は環境変数の`SLACK_CHANNEL_ID`を削除してください\n'\
             '- SlackAppのOAuth scopeに`channels:join`が追加されていることを確認してください'
         return Response(message)
     form = await request.form()
