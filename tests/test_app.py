@@ -9,6 +9,7 @@ from fastapi.testclient import TestClient
 from app import api, get_db, verify_signature
 from app.akashi import CLOCK_IN, CLOCK_OUT, NewStampResponse, Stamp
 from app.crud import fetch, fetch_all
+from app.settings import settings
 from tests.factories import UserTokenFactory
 from tests.helpers import Base, engine, session
 from tests.test_akashi import dummy_token, get_error_response, mocked_response
@@ -54,6 +55,15 @@ class SlashTest(TestCase):
         instance = UserTokenFactory.create()
         res = client.post('/slash', data={'user_id': instance.user_id, 'trigger_id': ''})
         assert res.text == 'すでに勤務を終了しています。'
+
+    @patch('app.joined', lambda *x, **y: False)
+    def test_not_joined(self):
+        res = client.post('/slash', data={'user_id': '', 'trigger_id': ''})
+        assert res.text, ':warning:エラーが発生しました\n'\
+            f'- 環境変数の`SLACK_CHANNEL_ID`を確認してください（現在の値：{settings.SLACK_CHANNEL_ID}）\n'\
+            '- private-channelには通知できません\n'\
+            '- 打刻の通知が不要な場合は環境変数の`SLACK_CHANNEL_ID`を削除してください\n'\
+            '- SlackAppのOAuth scopeに`channels:join`が追加されていることを確認してください'
 
 
 class ActionsTest(TestCase):
