@@ -35,7 +35,7 @@ ak4-slack
 
 - Heroku Schedulerに以下のjobを追加する
   - `curl https://[your-app-name].herokuapp.com/`（Frequency: Every 10 minutes）
-  - `python refresh_user_tokens`（Frequency: Daily at 6:00 PM UTC）
+  - `python refresh_user_tokens.py`（Frequency: Daily at 6:00 PM UTC）
 
 ## Environment Veriables
 
