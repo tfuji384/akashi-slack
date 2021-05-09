@@ -19,8 +19,11 @@
 -   [SlackAppを作成](https://api.slack.com/apps)する
 
 -   `OAuth & Permissions` -> `Scopes` -> `Bot Token Scopes`から
+
     -   `chat:write`
+
     -   `commands`
+
     -   `channels:join`（打刻の通知先を設定しない場合は不要）
         をそれぞれ追加し、ワークスペースにAppをインストールする
         ![bot user scopes](statics/bot_user_scopes.png)
@@ -82,8 +85,10 @@
 
 -   `pipenv run start`
     run local server
+
 -   `pipenv run sort`
     run isort
+
 -   `pipenv run test-cov`
     run tests
 
