@@ -16,15 +16,34 @@ ak4-slack
 
 - [SlackAppを作成](https://api.slack.com/apps)する
 - `OAuth & Permissions` -> `Scopes` -> `Bot Token Scopes`から
+  - `chat:write`
+  - `commands`
+  - `channels:join`（打刻の通知先を設定しない場合は不要）
+  をそれぞれ追加し、ワークスペースにAppをインストールする
 ### Deploy to Heroku
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+![set conf vars](statics/conf_vars.png)
+
+- 環境変数を追加してデプロイする
+  - `AKASHI_COMPANY_ID`: ログイン時に入力するAKASHIの企業ID
+  - `SLACK_BOT_TOKEN`: 作成したSlackAppのBot User Token
+
+![bot user token](statics/token.png)
+
+  - `SLACK_CHANNEL_ID`: 打刻を通知したいチャンネル（e.g. 勤怠報告チャンネルなど、設定しない場合通知されません）
+
+  - `SLACK_SIGNING_SECRET`: リクエストの署名に使われる文字列
+
+![app credentials](statics/app_credentials.png)
+
 
 - Heroku Schedulerに以下のjobを追加する
   - `curl https://[your-app-name].herokuapp.com/`（Frequency: Every 10 minutes）
   - `python refresh_user_tokens.py`（Frequency: Daily at 6:00 PM UTC）
 
-### Set Up SlackAPp
+### Set Up SlackApp
 
 - slash commandsの設定
   - slash commandを追加する
