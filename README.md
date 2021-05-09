@@ -22,6 +22,7 @@ ak4-slack
   - `commands`
   - `channels:join`（打刻の通知先を設定しない場合は不要）
   をそれぞれ追加し、ワークスペースにAppをインストールする
+  ![bot user scopes](statics/bot_user_scopes.png)
 ### Deploy to Heroku
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
@@ -49,19 +50,14 @@ ak4-slack
 
 - slash commandsの設定
   - slash commandを追加する
-
 ![slach command 1](statics/slash_commands_1.png)
-
   - request urlを設定する(パスは`/slash`)
-
 ![slash command 2](statics/slash_commands_2.png)
 
 - interactivity
   - interactivity & shortcutsを設定する（パスは`/actions`）
 
 ![interactivity](statics/interactivity.png)
-
-![bot user scopes](statics/bot_user_scopes.png)
 
 ## Environment Veriables
 
