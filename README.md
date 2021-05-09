@@ -16,18 +16,22 @@ ak4-slack
 
 - slash commandsの設定
   - slash commandを追加する
-  ![slach command 1](statics/slash_commands_1.png)
+
+![slach command 1](statics/slash_commands_1.png)
 
   - request urlを設定する(パスは`/slash`)
-  ![slash command 2](statics/slash_commands_2.png)
+
+![slash command 2](statics/slash_commands_2.png)
 
 - interactivity
   - interactivity & shortcutsを設定する（パスは`/actions`）
-  ![interactivity](statics/interactivity.png)
+
+![interactivity](statics/interactivity.png)
 
 - permissionsを追加
   - `chat:write`, `channels:join`（打刻の通知先を設定しない場合は不要）を追加する
-  ![bot user scopes](statics/bot_user_scopes.png)
+
+![bot user scopes](statics/bot_user_scopes.png)
 
 ### Deploy to Heroku
 
