@@ -12,7 +12,19 @@ ak4-slack
 
 ## Deploy
 
-### SlackApp
+### Create SlackApp
+
+- [SlackAppを作成](https://api.slack.com/apps)する
+- `OAuth & Permissions` -> `Scopes` -> `Bot Token Scopes`から
+### Deploy to Heroku
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+- Heroku Schedulerに以下のjobを追加する
+  - `curl https://[your-app-name].herokuapp.com/`（Frequency: Every 10 minutes）
+  - `python refresh_user_tokens.py`（Frequency: Daily at 6:00 PM UTC）
+
+### Set Up SlackAPp
 
 - slash commandsの設定
   - slash commandを追加する
@@ -28,18 +40,7 @@ ak4-slack
 
 ![interactivity](statics/interactivity.png)
 
-- permissionsを追加
-  - `chat:write`, `channels:join`（打刻の通知先を設定しない場合は不要）を追加する
-
 ![bot user scopes](statics/bot_user_scopes.png)
-
-### Deploy to Heroku
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-- Heroku Schedulerに以下のjobを追加する
-  - `curl https://[your-app-name].herokuapp.com/`（Frequency: Every 10 minutes）
-  - `python refresh_user_tokens.py`（Frequency: Daily at 6:00 PM UTC）
 
 ## Environment Veriables
 
