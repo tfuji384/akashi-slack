@@ -6,6 +6,8 @@ ak4-slack
 
 - Slackからslash commandでAKASHIに打刻するためのAPI
 
+※AKASHIの従業員設定->利用機能設定から[公開APIを「利用する」に設定する](https://akashi.zendesk.com/hc/ja/articles/115004379053-%E5%BE%93%E6%A5%AD%E5%93%A1%E8%A8%AD%E5%AE%9A#change)必要があります
+
 ## Demo
 
 ![demo](statics/demo.gif)
