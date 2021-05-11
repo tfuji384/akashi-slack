@@ -147,7 +147,7 @@ class AkashiRequestClient:
         if not res.ok:
             raise RequestFailedError(status_code=res.status_code, url=url)
         api_response = AkashiAPIResponse(**res.json())
-        if api_response.success:
+        if api_response.response:
             return api_response.response
         raise APIError(api_response, self.__token)
 

@@ -11,7 +11,7 @@ from sqlalchemy.orm import Session
 
 from app.akashi import AkashiRequestClient, APIError, annotate_stamp_type
 from app.buttons import AlreadyClockedOutException, get_buttons
-from app.crud import fetch, update_or_create
+from app.crud import fetch, update_or_create, UserTokenDoesNotExtsts
 from app.db import SessionLocal
 from app.settings import settings
 
@@ -29,6 +29,8 @@ async def get_db():
 
 
 async def verify_signature(request: Request) -> bool:
+    if not settings.SLACK_SIGNING_SECRET:
+        raise HTTPException(HTTPStatus.FORBIDDEN)
     verifier = SignatureVerifier(settings.SLACK_SIGNING_SECRET)
     if verifier.is_valid_request(await request.body(), dict(request.headers)):
         return True
@@ -61,6 +63,8 @@ async def slash(request: Request, db: Session = Depends(get_db)):
     trigger_id = form['trigger_id']
     try:
         user_token = fetch(db, user_id=user_id)
+        if not user_token:
+            raise UserTokenDoesNotExtsts()
         akashi = AkashiRequestClient(user_token.token)
         last_stamp = akashi.fetch_last_stamp()
         return {
@@ -73,7 +77,7 @@ async def slash(request: Request, db: Session = Depends(get_db)):
         }
     except AlreadyClockedOutException:
         return Response('すでに勤務を終了しています。')
-    except:
+    except Exception:
         dialog = DialogBuilder()
         dialog.callback_id('api_token').title('APIトークンを登録する').submit_label('Submit').state('Limo').text_area(
             name='api_coken', label='APIトークンを入力してください', hint='https://atnd.ak4.jp/mypage/tokens から発行できます')
@@ -106,13 +110,16 @@ async def actions(request: Request, db: Session = Depends(get_db)):
         return Response()
     elif callback_id == 'stamp':
         user_token = fetch(db, user_id=user_id)
+        if not user_token:
+            raise UserTokenDoesNotExtsts()
         akashi = AkashiRequestClient(user_token=user_token.token)
         try:
             stamp = akashi.stamp(payload['actions'][0]['value'])
-            slack.chat_postMessage(
-                channel=settings.SLACK_CHANNEL_ID,
-                text=f'<@{user_id}>さんが{annotate_stamp_type(stamp.type)}しました',
-            )
+            if settings.SLACK_CHANNEL_ID:
+                slack.chat_postMessage(
+                    channel=settings.SLACK_CHANNEL_ID,
+                    text=f'<@{user_id}>さんが{annotate_stamp_type(stamp.type)}しました',
+                )
         except APIError as e:
             logger.error(e, exc_info=True)
             return Response('APIトークンを確認してください')

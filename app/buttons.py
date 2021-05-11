@@ -5,18 +5,17 @@ from slack_sdk.models.attachments import ActionButton, ConfirmObject
 
 PRIMARY = 'primary'
 DANGER = 'danger'
-DEFAULT = 'default'
 BUTTON = 'button'
 
 
-def get_button(_type: int, style: Optional[str] = DEFAULT, confirm: Optional[ConfirmObject] = None) -> dict:
+def get_button(_type: int, style: Optional[str] = PRIMARY, confirm: Optional[ConfirmObject] = None) -> dict:
     text = annotate_stamp_type(_type)
-    return ActionButton(text=text, name=text, value=str(_type), style=style, confirm=confirm)
+    return ActionButton(text=text, name=text, value=str(_type), style=style, confirm=confirm).to_dict()
 
 
 confirm = ConfirmObject(title='確認', deny='いいえ', confirm='はい', text='本当に勤務を終了しますか？')
 
-clock_in = get_button(_type=CLOCK_IN, style=PRIMARY)
+clock_in = get_button(_type=CLOCK_IN)
 clock_out = get_button(_type=CLOCK_OUT, style=DANGER, confirm=confirm)
 break_ = get_button(_type=BREAK)
 restart = get_button(_type=RESTART)
