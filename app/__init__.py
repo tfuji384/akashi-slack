@@ -5,7 +5,7 @@ from uuid import UUID
 
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from slack_sdk import WebClient
-from slack_sdk.models.dialogs import DialogBuilder, DialogTextField
+from slack_sdk.models.dialogs import DialogBuilder
 from slack_sdk.signature import SignatureVerifier
 from sqlalchemy.orm import Session
 
