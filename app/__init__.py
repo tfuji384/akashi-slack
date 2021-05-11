@@ -5,6 +5,7 @@ from uuid import UUID
 
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from slack_sdk import WebClient
+from slack_sdk.models.dialogs import DialogBuilder, DialogTextField
 from slack_sdk.signature import SignatureVerifier
 from sqlalchemy.orm import Session
 
@@ -73,19 +74,11 @@ async def slash(request: Request, db: Session = Depends(get_db)):
     except AlreadyClockedOutException:
         return Response('すでに勤務を終了しています。')
     except:
+        dialog = DialogBuilder()
+        dialog.callback_id('api_token').title('APIトークンを登録する').submit_label('Submit').state('Limo').text_area(
+            name='api_coken', label='APIトークンを入力してください', hint='https://atnd.ak4.jp/mypage/tokens から発行できます')
         slack.dialog_open(
-            dialog={
-                'callback_id': 'api_token',
-                'title': 'APIトークンを登録する',
-                'submit_label': 'Submit',
-                'state': 'Limo',
-                'elements': [{
-                    'type': 'text',
-                    'label': 'APIトークンを入力してください',
-                    'name': 'api_token',
-                    'hint': 'https://atnd.ak4.jp/mypage/tokens から発行できます'
-                }]
-            },
+            dialog=dialog.to_dict(),
             trigger_id=trigger_id,
         )
         return Response()
