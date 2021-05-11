@@ -46,9 +46,15 @@ def update_or_create(db: Session,
     instance = fetch(db, user_id)
     if instance:
         return update(db, instance, token, expires_at)
+    if not token:
+        raise Exception
     return create(db, user_id, token, expires_at)
 
 
 def delete(db: Session, instance: UserToken):
     db.delete(instance)
     db.commit()
+
+
+class UserTokenDoesNotExtsts(Exception):
+    ...

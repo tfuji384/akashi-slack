@@ -25,6 +25,7 @@ rstr = "*"
 pytest-cov = "*"
 sqlalchemy-utils = "*"
 python-dotenv = "*"
+mypy = "*"
 
 [requires]
 python_version = "3.9"
