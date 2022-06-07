@@ -80,7 +80,7 @@ async def slash(request: Request, db: Session = Depends(get_db)):
     except Exception:
         dialog = DialogBuilder()
         dialog.callback_id('api_token').title('APIトークンを登録する').submit_label('Submit').state('Limo').text_area(
-            name='api_coken', label='APIトークンを入力してください', hint='https://atnd.ak4.jp/mypage/tokens から発行できます')
+            name='api_token', label='APIトークンを入力してください', hint='https://atnd.ak4.jp/mypage/tokens から発行できます')
         slack.dialog_open(
             dialog=dialog.to_dict(),
             trigger_id=trigger_id,
