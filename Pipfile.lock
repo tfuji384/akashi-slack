@@ -179,11 +179,11 @@
         },
         "slack-sdk": {
             "hashes": [
-                "sha256:4d3f9f1a984fe828260010fc66ebcd1aeb63b78e6e47d366a9e7177ccc529e84",
-                "sha256:8ceb46f7989d2ba1694dec8555dbda7f750b9216e453da4ad3e32a498bc9ea9a"
+                "sha256:60302e32d48db6b4ea5453d92f23ecf3f7b843f799f61eaf271315264d7cb281",
+                "sha256:70d5a55a5d52ba7128d5347ed995425e1f83e729667ab296035bcf6c1b13a049"
             ],
             "index": "pypi",
-            "version": "==3.5.1"
+            "version": "==3.17.2"
         },
         "sqlalchemy": {
             "hashes": [
