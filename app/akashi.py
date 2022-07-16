@@ -1,6 +1,6 @@
 import logging
 from datetime import date, datetime
-from typing import List, Optional
+from typing import Optional
 
 from dateutil.parser import parse
 from pydantic import BaseModel, Field, validator
@@ -67,7 +67,7 @@ class NewStampResponse(BaseModel):
 
 class FetchedStampResponse(BaseModel):
     count: int
-    stamps: List[Stamp]
+    stamps: list[Stamp]
 
 
 class ReissuedTokenResponse(BaseModel):

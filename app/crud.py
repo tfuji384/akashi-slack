@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, Optional, Union
+from typing import Optional, Union
 
 from sqlalchemy import or_
 from sqlalchemy.orm import Session
@@ -11,11 +11,11 @@ def fetch(db: Session, user_id: str) -> Union[UserToken, None]:
     return db.query(UserToken).filter(UserToken.user_id == user_id).one_or_none()
 
 
-def fetch_all(db: Session) -> List[UserToken]:
+def fetch_all(db: Session) -> list[UserToken]:
     return db.query(UserToken).all()
 
 
-def fetch_by_expires_at(db: Session, expires_at_lt: datetime) -> List[UserToken]:
+def fetch_by_expires_at(db: Session, expires_at_lt: datetime) -> list[UserToken]:
     return db.query(UserToken).filter(or_(UserToken.expires_at == None, UserToken.expires_at < expires_at_lt)).all()
 
 
