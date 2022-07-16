@@ -11,7 +11,7 @@ from sqlalchemy.orm import Session
 
 from app.akashi import AkashiRequestClient, APIError, annotate_stamp_type
 from app.buttons import AlreadyClockedOutException, get_buttons
-from app.crud import fetch, update_or_create, UserTokenDoesNotExtsts
+from app.crud import UserTokenDoesNotExtsts, fetch, update_or_create
 from app.db import SessionLocal
 from app.settings import settings
 
@@ -77,7 +77,8 @@ async def slash(request: Request, db: Session = Depends(get_db)):
         }
     except AlreadyClockedOutException:
         return Response('すでに勤務を終了しています。')
-    except Exception:
+    except Exception as e:
+        logger.error(e, exc_info=True)
         dialog = DialogBuilder()
         dialog.callback_id('api_token').title('APIトークンを登録する').submit_label('Submit').state('Limo').text_area(
             name='api_token', label='APIトークンを入力してください', hint='https://atnd.ak4.jp/mypage/tokens から発行できます')
